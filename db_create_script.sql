@@ -21,9 +21,9 @@ CREATE TABLE  answers(
 	id_answer INTEGER NOT NULL auto_increment,
 	text varchar(100) NOT NULL,
 	votes int NOT NULL ,
-    id_question int NOT NULL,
+    id_question int,
 	PRIMARY KEY (id_answer),
-    CONSTRAINT FK_comodity FOREIGN KEY (id_question) REFERENCES commodity(id_question)
+    CONSTRAINT FK_question FOREIGN KEY (id_question) REFERENCES questions(id_question)
 );
 
 -- Just Test Data
