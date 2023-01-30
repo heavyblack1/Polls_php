@@ -28,7 +28,7 @@
         $text = $conn->real_escape_string($_POST["text"]);
         $id = $conn->real_escape_string($_GET["id"]);
 
-        $sql_query = "INSERT INTO polls.answers (text, votes, id_question) VALUES('$text', 0, '$id');";
+        $sql_query = "INSERT INTO answers (text, votes, id_question) VALUES('$text', 0, '$id');";
 
         $conn->query("SET NAMES 'utf8'"); // Data will be send to db server as utf-8
 
@@ -55,7 +55,7 @@
     // get id from url
     $id = $conn->real_escape_string($_GET["id"]);
 
-    $sql_query = "SELECT id_answer, a.text as answer_text, votes, a.id_question,q.text as q_text  FROM polls.answers a left join questions as q ON a.id_question = q.id_question WHERE a.id_question = '$id';";
+    $sql_query = "SELECT id_answer, a.text as answer_text, votes, a.id_question,q.text as q_text  FROM answers a left join questions as q ON a.id_question = q.id_question WHERE a.id_question = '$id';";
 
     $conn->query("SET NAMES 'utf8'");
 

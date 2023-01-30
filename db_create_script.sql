@@ -21,17 +21,17 @@ CREATE TABLE  answers(
 	id_answer INTEGER NOT NULL auto_increment,
 	text varchar(100) NOT NULL,
 	votes int NOT NULL ,
-    id_question int,
+    id_question int NOT NULL,
 	PRIMARY KEY (id_answer),
     CONSTRAINT FK_question FOREIGN KEY (id_question) REFERENCES questions(id_question)
 );
 
 -- Just Test Data
-INSERT INTO polls.questions
+INSERT INTO questions
 (`text`)
 VALUES('Are you using docker as dev enviroment?');
 
 
-INSERT INTO polls.answers
+INSERT INTO answers
 (`text`, votes, id_question)
 VALUES('Yes', 2, 1);
