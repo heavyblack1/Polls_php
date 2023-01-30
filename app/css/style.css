@@ -1,0 +1,130 @@
+:root {
+    --section-space: 3rem;
+    --text-color: #fafafa;
+    --fields-text-color: #263238;
+    --fields-color: #ECEFF1;
+}
+
+body {
+    background-color: #212121;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    margin-bottom: var(--section-space);
+}
+
+table {
+    border-collapse: collapse;
+
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+td,
+th {
+    padding: 0.5rem;
+
+}
+
+
+
+/* Form Styles */
+
+.form-inline {
+    /* same size as content */
+    display: inline-flex;
+    background-color: #263238;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.form-block {
+    /* same size as content */
+    display: inline-block;
+    background-color: #263238;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+form>* {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    line-height: 1.5rem;
+    align-self: flex-start;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+label {
+    white-space: nowrap;
+}
+
+button {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+}
+
+.calc-buttons {
+    margin: 1rem 0.4rem;
+    width: 100%;
+}
+
+.calc-buttons * {
+
+    margin: 0.2rem 0rem;
+}
+
+
+form input[type=text],
+textarea {
+    width: 100%;
+    min-width: 10rem;
+    max-width: 50rem;
+    border: 0 !important;
+
+    border-radius: 0.5rem;
+    color: var(--fields-text-color);
+    background-color: var(--fields-color);
+    padding: 0.2rem;
+}
+
+form input[type=text]:focus,
+textarea:focus {
+    outline: none;
+}
+
+select {
+    /* top/bottom left/right */
+    padding: 0.2rem 0.8rem;
+    appearance: none;
+    border: 0;
+    border-radius: 0.5rem;
+    outline: 0;
+    cursor: pointer;
+    color: var(--fields-text-color);
+    background-color: var(--fields-color);
+    /* Arrow */
+    appearance: none;
+
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -256 1792 1792"><path d="M1426.44 407.864q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45q19-19 45-19h896q26 0 45 19t19 45z" fill="rgb(250, 250, 250)" /></svg>'), linear-gradient(to left, rgb(96, 125, 139) 2.5rem, var(--fields-color) 2.5rem);
+    background-repeat: no-repeat;
+    background-position: 95% center;
+    /* reserve space for arrow */
+    padding-right: 4rem;
+
+}
+
+
+
+/* select dropdown */
+
+select:focus,
+select:hover {
+    outline: none;
+    border: 0;
+    border-radius: 0.5rem;
+}
