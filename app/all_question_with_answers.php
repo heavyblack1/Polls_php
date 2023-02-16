@@ -5,77 +5,68 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./img/bars-progress-solid.svg" type="image/svg+xml">
     <title>Detailed List</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/php_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-
-<?php
-    require "db_connect_conf.php";
-    if (isset($_GET["id"])) {
-
-
+    <header><a href="index.php" class="back"><i class="fa-solid fa-arrow-left"></i></a></header>
+    <section>
+        <?php
+        require "db_connect_conf.php";
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
+        $conn->query("SET NAMES 'utf8'");
 
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        //echo "Connected successfully";
 
-        // get form fields
-        $id = $conn->real_escape_string($_GET["id"]);
+        if (isset($_GET["id"])) {
 
-        $sql_query = "UPDATE answers SET votes= votes+1 WHERE id_answer='$id';";
+            // get form fields
+            $id = $conn->real_escape_string($_GET["id"]);
 
-        $conn->query("SET NAMES 'utf8'"); // Data will be send to db server as utf-8
-        if (!($conn->query($sql_query))) { 
-            echo "Error: " . $sql_query . "<br>" . $conn->error;
-        }
-        $conn->close();
-    }
-    ?>
+            $sql_query = "UPDATE answers SET votes= votes+1 WHERE id_answer='$id';";
 
-    <?php
-    require "db_connect_conf.php";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql_query = "SELECT id_question, text FROM questions;        ";
-
-    
-    $conn->query("SET NAMES 'utf8'");
-
-    if ($result = $conn->query($sql_query) or die($conn->error)) {
-        //echo "<table>";
-        while ($line = $result->fetch_array(MYSQLI_ASSOC)) {
-            echo "<h3>" . $line["text"] . "</h3>";
-            $id_question = $line["id_question"];
-            $sql_query_answers = "SELECT id_answer, text, votes, id_question FROM answers where id_question = '$id_question' ";
-            if (!($result_answer = $conn->query($sql_query_answers) or die($conn->error))) {
+            if (!($conn->query($sql_query))) {
                 echo "Error: " . $sql_query . "<br>" . $conn->error;
             }
-            while ($item = $result_answer->fetch_array(MYSQLI_ASSOC)) {
-                echo "<p>" . $item["text"] . " <a href='all_question_with_answers.php?id=". $item["id_answer"] ."'>Votes ". $item["votes"] . "</a></p>";
-            }
         }
-        //echo "</table>";
-    } else {
-        echo "Error: " . $sql_query . "<br>" . $conn->error;
-    }
+        ?>
+
+        <?php
+
+        $sql_query = "SELECT q.id_question, q.text as q_text, a.id_answer, a.text as answer_text, a.votes FROM questions q join answers a on a.id_question=q.id_question ;";
 
 
-    $result->free_result();
-    $conn->close();
-    ?>
-    <a href=""></a>
+        $conn->query("SET NAMES 'utf8'");
+
+        if ($result = $conn->query($sql_query) or die($conn->error)) {
+            echo "<dl>";
+            $title = 1;
+            while ($line = $result->fetch_array(MYSQLI_ASSOC)) {
+                if ($title === (int) $line["id_question"]) {
+                    echo "<dt>" . $line["q_text"] . "</dt>";
+                    $title++;
+                }
+
+                echo "<dd>" . $line["answer_text"] .
+                    " <a href='all_question_with_answers.php?id=" . $line["id_answer"] . "'><i class='fa-solid fa-thumbs-up'></i> "
+                    . $line["votes"] . "</a></dd>";
+            }
+            echo "</dl>";
+        } else {
+            echo "Error: " . $sql_query . "<br>" . $conn->error;
+        }
+
+        $result->free_result();
+        $conn->close();
+        ?>
+    </section>
 </body>
+
 </html>

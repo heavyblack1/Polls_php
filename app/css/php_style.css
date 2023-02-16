@@ -1,0 +1,126 @@
+:root {
+    --section-space: 3rem;
+    --text-color: #fafafa;
+    --fields-text-color: #263238;
+    --fields-color: #ECEFF1;
+    --header-background-color: #263238;
+    --link-color: #42A5F5;
+}
+
+body {
+    background-color: #455A64;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--header-background-color);
+    padding: 2rem;
+}
+
+section {
+    margin-bottom: var(--section-space);
+    padding: 2rem;
+}
+
+p {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+ul>li {
+    list-style-type: none;
+    margin-bottom: 1rem;
+}
+
+dd {
+    margin: 1rem 2.5rem;
+    padding: 1rem 0;
+}
+
+dd>a {
+    text-decoration: none;
+    color: var(--link-color);
+    padding: 0.1rem 0.5rem;
+}
+
+a.back {
+    color: var(--link-color);
+    font-size: 2rem;
+}
+
+a {
+    background-color: #FF5722;
+    box-shadow: 0 5px 0 #BF360C;
+    color: var(--text-color);
+    padding: 0.5em 1em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a:hover {
+    background-color: #E64A19;
+    cursor: pointer;
+}
+
+/* Form Styles */
+
+form {
+    /* same size as content */
+    display: inline-flex;
+    flex-direction: column;
+    background-color: #263238;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+form>* {
+    box-sizing: border-box;
+    line-height: 1.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+label {
+    white-space: nowrap;
+    padding-bottom: 1rem;
+}
+
+button {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+}
+
+form input[type=text],
+textarea {
+    width: 20rem;
+    min-width: 10rem;
+    max-width: 50rem;
+    min-height: 2rem;
+    border: 0 !important;
+    border-radius: 0.5rem;
+    color: var(--fields-text-color);
+    background-color: var(--fields-color);
+    padding: 0.2rem;
+}
+
+form input[type=text]:focus,
+textarea:focus {
+    outline: none;
+}
+
+input[type=submit] {
+    border: none;
+    margin: 1rem;
+    background-color: #26A69A;
+    box-shadow: 0 5px 0 #004D40;
+    color: var(--text-color);
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #00897B;
+}

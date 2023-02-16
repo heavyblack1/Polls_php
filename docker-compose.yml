@@ -30,8 +30,6 @@ services:
     image: mysql:latest
     ports:
       - "3306:3306"
-    # mysqld fnofig by command
-    #command: --default-authentication-plugin=mysql_native_password --innodb_buffer_pool_size=1024M --innodb_read_io_threads=4 --innodb_flush_log_at_trx_commit=2 --innodb_flush_method=O_DIRECT
     env_file:
       - ".env"
     environment:
@@ -41,8 +39,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mysql:/var/lib/mysql
-      # mysqld config
-      #- ./docker/my.cnf:/etc/mysql/my.cnf
     restart: unless-stopped
   phpmyadmin:
     container_name: phpmyadmin_for_php_polls
